@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.canvas.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0"
+            prefWidth="1000.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="PhotoViewController">
+    <top>
+        <VBox BorderPane.alignment="CENTER">
+            <children>
+                <MenuBar fx:id="menuBarr">
+                    <menus>
+                        <Menu mnemonicParsing="false" text="File">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Close"/>
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Edit">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Delete"/>
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Help">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="About"/>
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+                <HBox alignment="CENTER_RIGHT" prefHeight="52.0" prefWidth="990.0" spacing="15.0"
+                      style="-fx-background-image: url(&quot;titleBackground.jpg&quot;);">
+                    <children>
+                        <Button fx:id="addPhoto" mnemonicParsing="false" onMouseClicked="#addPhotos" prefHeight="25.0"
+                                prefWidth="105.0" text="Add">
+                            <HBox.margin>
+                                <Insets left="30.0"/>
+                            </HBox.margin>
+                        </Button>
+                        <Button fx:id="deletePhoto" disable="true" mnemonicParsing="false" prefHeight="25.0"
+                                prefWidth="105.0" text="Delete"/>
+                        <Region prefHeight="52.0" prefWidth="170.0" HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="AlbumName" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0"
+                               prefWidth="228.0"
+                               style="-fx-font-family: &quot;MV Boli&quot;; -fx-font-size: 26; -fx-font-weight: bold;"
+                               text="#ALBUM id" textAlignment="CENTER" textFill="#bbbbbb">
+                            <effect>
+                                <DropShadow color="#d39884">
+                                    <input>
+                                        <Glow level="0.69"/>
+                                    </input>
+                                </DropShadow>
+                            </effect>
+                        </Label>
+                        <Region prefHeight="52.0" prefWidth="225.0" HBox.hgrow="ALWAYS"/>
+                        <Button fx:id="addPhoto1" mnemonicParsing="false" onMouseClicked="#backToMainView"
+                                prefHeight="33.0" prefWidth="105.0" text="Back"/>
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                    </VBox.margin>
+                </HBox>
+            </children>
+        </VBox>
+    </top>
+    <bottom>
+        <Label alignment="TOP_LEFT" text="Copyright by Tran Trong Tin © 2015" textFill="#d7d7d7"
+               BorderPane.alignment="BOTTOM_LEFT"/>
+    </bottom>
+    <center>
+        <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0"
+              style="-fx-background-image: url(&quot;mainBackground.jpg&quot;);" BorderPane.alignment="CENTER">
+            <children>
+                <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0"
+                      style="-fx-background-image: url(&quot;photoBackground.jpg&quot;);">
+                    <children>
+                        <VBox alignment="TOP_CENTER" prefHeight="425.0" prefWidth="128.0" spacing="10.0">
+                            <children>
+                                <Button mnemonicParsing="false" onMouseClicked="#zoomIn" prefHeight="33.0"
+                                        prefWidth="40.0" scaleZ="2.0" styleClass="button-navigator" text="+"/>
+                                <Slider fx:id="zoom_slider" orientation="VERTICAL" scaleZ="2.0">
+                                    <effect>
+                                        <ColorAdjust hue="0.4" saturation="0.35"/>
+                                    </effect>
+                                </Slider>
+                                <Button mnemonicParsing="false" onMouseClicked="#zoomOut" prefHeight="32.0"
+                                        prefWidth="40.0" scaleZ="2.0" styleClass="button-navigator" text="-"/>
+                                <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+                                    <children>
+                                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false"
+                                                onMouseClicked="#rotateLeft" prefHeight="33.0" prefWidth="60.0"
+                                                styleClass="rotateBtn" text="R_left"/>
+                                        <Region prefHeight="200.0" prefWidth="200.0"/>
+                                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false"
+                                                onMouseClicked="#rotateRight" prefWidth="60.0" styleClass="rotateBtn"
+                                                text="R_right"/>
+                                    </children>
+                                    <effect>
+                                        <DropShadow color="#000000b2" height="32.86" radius="12.965"/>
+                                    </effect>
+                                </HBox>
+                                <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+                                    <children>
+                                        <ToggleButton fx:id="toBW" maxWidth="-Infinity" minWidth="-Infinity"
+                                                      mnemonicParsing="false" onMouseClicked="#toBlackWhite"
+                                                      prefWidth="60.0" text="B/W"/>
+                                        <Region prefHeight="200.0" prefWidth="200.0"/>
+                                        <ToggleButton fx:id="toNeg" maxWidth="-Infinity" minWidth="-Infinity"
+                                                      mnemonicParsing="false" onMouseClicked="#toNegative"
+                                                      prefWidth="60.0" text="Negative"/>
+                                    </children>
+                                    <effect>
+                                        <DropShadow color="#000000b2" height="32.86" radius="12.965"/>
+                                    </effect>
+                                </HBox>
+                                <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+                                    <children>
+                                        <ToggleButton fx:id="toBlu" maxWidth="-Infinity" minWidth="-Infinity"
+                                                      mnemonicParsing="false" onMouseClicked="#toBlur" prefWidth="60.0"
+                                                      text="Blur"/>
+                                        <Region prefHeight="200.0" prefWidth="200.0"/>
+                                        <ToggleButton fx:id="toContr" maxWidth="-Infinity" minWidth="-Infinity"
+                                                      mnemonicParsing="false" onMouseClicked="#toContrast"
+                                                      prefWidth="60.0" text="Constrast"/>
+                                    </children>
+                                    <effect>
+                                        <DropShadow color="#000000b2" height="32.86" radius="12.965"/>
+                                    </effect>
+                                </HBox>
+                            </children>
+                            <HBox.margin>
+                                <Insets top="5.0"/>
+                            </HBox.margin>
+                        </VBox>
+                        <TilePane alignment="CENTER" prefHeight="430.0" prefWidth="725.0">
+                            <children>
+                                <ImageView fx:id="mainPhoto" fitHeight="430.0" fitWidth="800.0" pickOnBounds="true"
+                                           preserveRatio="true">
+                                    <image>
+                                        <Image url="@Animal/xCat.jpg"/>
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </TilePane>
+                        <Button fx:id="prevButton" alignment="CENTER" mnemonicParsing="false"
+                                onMouseClicked="#previousClick" prefHeight="32.0" prefWidth="45.0"
+                                styleClass="button-navigator" text="&lt;"/>
+                        <Button fx:id="nextButton" alignment="CENTER" mnemonicParsing="false"
+                                onMouseClicked="#nextClick" prefHeight="33.0" prefWidth="45.0"
+                                styleClass="button-navigator" text="&gt;">
+                            <HBox.margin>
+                                <Insets left="5.0"/>
+                            </HBox.margin>
+                        </Button>
+                    </children>
+                </HBox>
+                <ScrollPane hbarPolicy="ALWAYS" prefHeight="135.0" prefWidth="1000.0" vbarPolicy="NEVER">
+                    <content>
+                        <GridPane fx:id="PhotoPane" alignment="CENTER" hgap="15.0" maxHeight="-Infinity"
+                                  maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0"
+                                  prefWidth="160.0" style="-fx-background-image: url(&quot;mainBackground.jpg&quot;);"
+                                  styleClass="background" vgap="15.0">
+                            <columnConstraints>
+                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0"
+                                                   prefWidth="100.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                            </rowConstraints>
+                            <children>
+                                <ImageView fitHeight="100.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true"
+                                           GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <image>
+                                        <Image url="@Animal/xCat.jpg"/>
+                                    </image>
+                                </ImageView>
+                            </children>
+                            <padding>
+                                <Insets bottom="10.0" left="20.0"/>
+                            </padding>
+                        </GridPane>
+                    </content>
+                    <padding>
+                        <Insets left="30.0" top="10.0"/>
+                    </padding>
+                </ScrollPane>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>
